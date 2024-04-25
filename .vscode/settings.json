@@ -1,0 +1,7 @@
+{
+    "editor.rulers": [
+        120
+    ],
+    "rewrap.autoWrap.enabled": true,
+    "python.terminal.activateEnvironment": true
+}
