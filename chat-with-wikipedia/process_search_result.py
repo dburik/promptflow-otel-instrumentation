@@ -1,4 +1,7 @@
+from instrumentation.instrumentation import get_azure_monitor_logger
 from promptflow.core import tool
+
+az_mon_logger = get_azure_monitor_logger()
 
 
 @tool
@@ -13,5 +16,5 @@ def process_search_result(search_result):
         context_str = "\n\n".join([format(c) for c in context])
         return context_str
     except Exception as e:
-        print(f"Error: {e}")
+        az_mon_logger.exception(f"Failed to process search result: {e}")
         return ""

@@ -2,8 +2,10 @@ import re
 
 import bs4
 import requests
-
+from instrumentation.instrumentation import get_azure_monitor_logger
 from promptflow.core import tool
+
+az_mon_logger = get_azure_monitor_logger()
 
 
 def decode_str(string):
@@ -21,6 +23,9 @@ def remove_nested_parentheses(string):
 def get_wiki_url(entity: str, count=2):
     # Send a request to the URL
     url = f"https://en.wikipedia.org/w/index.php?search={entity}"
+
+    az_mon_logger.info(f"Getting Wikipedia URL for entity: {entity}")
+
     url_list = []
     try:
         headers = {
@@ -53,5 +58,5 @@ def get_wiki_url(entity: str, count=2):
             print(msg)
         return url_list[:count]
     except Exception as e:
-        print("Get url failed with error: {}".format(e))
+        az_mon_logger.exception(f"Failed to get Wikipedia URL for entity: {entity}", exc_info=e)
         return url_list

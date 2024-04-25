@@ -15,12 +15,6 @@ outputs:
     reference: ${augmented_chat.output}
     is_chat_output: true
 nodes:
-- name: instrument_otel
-  type: python
-  source:
-    type: code
-    path: instrument_otel.py
-  inputs: {}
 - name: extract_query_from_question
   type: llm
   source:
@@ -73,5 +67,5 @@ nodes:
     question: ${inputs.question}
     chat_history: ${inputs.chat_history}
     contexts: ${process_search_result.output}
-  connection: dburik_azure_open_ai
+  connection: azure_open_ai_connection
   api: chat
