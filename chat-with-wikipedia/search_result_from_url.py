@@ -72,6 +72,7 @@ def fetch_text_content_from_url(url: str, count: int = 10, parent_ctx: context.C
 @tool
 def search_result_from_url(url_list: list, count: int = 10):
     results = []
+    # need to capture parent context here to support trace correlation in multi-threading
     partial_func_of_fetch_text_content_from_url = partial(
         fetch_text_content_from_url, count=count, parent_ctx=context.get_current()
     )
