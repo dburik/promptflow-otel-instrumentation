@@ -3,3 +3,4 @@ promptflow-tools
 promptflow.core
 python-dotenv
 bs4
+azure-monitor-opentelemetry
